@@ -1,6 +1,6 @@
-# module-template
+# ph-image-list
 
-这是一个模块组件开发的脚手架项目，用于快速搭建模块开发项目。
+图片列表展示组件
 
 ## 使用
 
@@ -14,13 +14,13 @@
 
 ## Command
 
-```
-	#测试	
-	npm run test	
-	#打包	
-	npm run build	
-	#例子演示	
-	npm run demo	
+```bash
+#测试
+npm run test
+#打包
+npm run build
+#例子演示
+npm run demo
 ```
 
 
