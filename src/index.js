@@ -1,1 +1,1 @@
-import '../css/index.less';
+export ImgList from './ImgList';

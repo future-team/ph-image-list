@@ -1,3 +1,6 @@
+body {
+  margin: 0;
+}
 .ph-img-item {
   position: relative;
   width: 25%;
@@ -49,12 +52,82 @@
 }
 
 .ph-img-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #000;
+  .ph-img-slider-ctn {
+    // 动态计算高度和宽度
+    width: 2880px;
+    height: 100%;
+    .ph-img-item {
+      float: left;
+      padding: 0;
+      z-index: 1;
+      text-align: center;
+      .ph-img-ctn {
+        transform-origin: 0 0 0;
+        transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+        transition-duration: 0ms;
+        transform: translate(0px, 0px) scale(1) translateZ(0px);
+        .ph-img {
+          max-width: 100%;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  .ph-img-slider-option {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    a {
+      display: block;
+      width: 72px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+      background: rgba(128,128,128,.4);
+      box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
+      border-radius: 2px;
+      text-decoration: none;
+      &.ph-img-close {
+        float: left;
+        margin: 0 0 0 15px;
+      }
+      &.ph-img-delete {
+        float: right;
+        margin: 0 15px 0 0;
+      }
+    }
+    .ph-img-close, .ph-img-delete {
+
+    }
+    .ph-img-delete {
+
+    }
+    .ph-img-cur {
+
+    }
+    .ph-img-count {
+
+    }
+  }
   .ph-img-slider-close {
     &:before{
       content: "X";
     }
   }
-  display: none;
   .delete {
 
   }
