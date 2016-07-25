@@ -126,30 +126,30 @@ export default class ImgList extends Component {
                 }
                 <Modal className="ph-img-slider-modal">
                     { showImgListFull === true &&
-                        <div className="ph-img-slider">
-                            <Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}>
-                                <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
-                                    {
-                                        images.map((item, index) => (
-                                            <div key={item.id} className="ph-img-item" style={this.state.sliderItemStyle}>
-                                                <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
-                                                    <img className="ph-img " src={item.url} alt={item.name}/>
-                                                </div>
+                    <div className="ph-img-slider">
+                        <Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}>
+                            <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
+                                {
+                                    images.map((item, index) => (
+                                        <div key={item.id} className="ph-img-item" style={this.state.sliderItemStyle}>
+                                            <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
+                                                <img className="ph-img " src={item.url} alt={item.name}/>
                                             </div>
-                                        ))
-                                    }
-                                </div>
-                            </Swiper>
-                            <div className="ph-img-slider-option">
-                                <p className="ph-img-close"><a href="javascript:;" onClick={this.closeModal.bind(this)}>关闭</a></p>
-                                <p className="ph-img-delete">{
-                                    this.state.isEditAble &&
-                                    <a href="javascript:;" onClick={this.deleteItem.bind(this, undefined)}>删除</a>
-                                }</p>
-                                <span className="ph-img-cur">{(imgIndex||0)+1}</span>
-                                <span className="ph-img-count">/{images.length}</span>
+                                        </div>
+                                    ))
+                                }
                             </div>
+                        </Swiper>
+                        <div className="ph-img-slider-option">
+                            <p className="ph-img-close"><a href="javascript:;" onClick={this.closeModal.bind(this)}>关闭</a></p>
+                            <p className="ph-img-delete">{
+                                this.state.isEditAble &&
+                                <a href="javascript:;" onClick={this.deleteItem.bind(this, undefined)}>删除</a>
+                            }</p>
+                            <span className="ph-img-cur">{(imgIndex||0)+1}</span>
+                            <span className="ph-img-count">/{images.length}</span>
                         </div>
+                    </div>
                     }
                 </Modal>
             </div>
