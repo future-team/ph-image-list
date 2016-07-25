@@ -6,7 +6,7 @@ export default class Modal extends React.Component {
         this.portalElement = null
     }
     componentDidMount() {
-        var p = this.props.className && document.getElementsByClassName(this.props.className)[0];
+        var p = this.props.className && document.getElementById(this.props.className);
         if (!p) {
             var p = document.createElement('div');
             p.id = this.props.className;

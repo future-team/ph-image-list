@@ -1,6 +1,3 @@
-body {
-  margin: 0;
-}
 .ph-img-item {
   position: relative;
   width: 25%;
@@ -38,7 +35,6 @@ body {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  height: 24vw;
   .ph-img-count {
     position: absolute;
     bottom: 10px;
@@ -48,6 +44,11 @@ body {
     border-radius: 5px;
     font-size: 14px;
     background: rgba(0,0,0,0.8);
+  }
+  .ph-img-empty {
+    flex: 1;
+    text-align: center;
+    color: #ccc
   }
 }
 
@@ -59,10 +60,11 @@ body {
   width: 100%;
   overflow: hidden;
   background-color: #000;
+  .ph-img-slider-animation {
+    transition: transform 0.3s ease-out;
+  }
   .ph-img-slider-ctn {
     // 动态计算高度和宽度
-    width: 2880px;
-    height: 100%;
     .ph-img-item {
       float: left;
       padding: 0;
@@ -89,46 +91,36 @@ body {
     line-height: 30px;
     text-align: center;
     color: #fff;
-    a {
-      display: block;
+    .ph-img-close, .ph-img-delete {
       width: 72px;
       height: 30px;
       line-height: 30px;
       text-align: center;
       font-size: 16px;
-      color: #fff;
-      background: rgba(128,128,128,.4);
-      box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
-      border-radius: 2px;
-      text-decoration: none;
-      &.ph-img-close {
-        float: left;
-        margin: 0 0 0 15px;
-      }
-      &.ph-img-delete {
-        float: right;
-        margin: 0 15px 0 0;
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: #fff;
+        background: rgba(128,128,128,.4);
+        box-shadow: 0 0 1px rgba(0,0,0,.3) inset;
+        border-radius: 2px;
       }
     }
-    .ph-img-close, .ph-img-delete {
+    .ph-img-close {
+      float: right;
+      margin: 0 15px 0 0;
 
     }
     .ph-img-delete {
-
-    }
-    .ph-img-cur {
-
-    }
-    .ph-img-count {
-
+      float: left;
+      margin: 0 0 0 15px;
     }
   }
   .ph-img-slider-close {
     &:before{
       content: "X";
     }
-  }
-  .delete {
-
   }
 }

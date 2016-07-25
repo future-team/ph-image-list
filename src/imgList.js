@@ -1,18 +1,24 @@
 import React,{PropTypes,Component} from 'react'
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Modal from './Modal'
+import Swiper from './Swiper'
 
 import '../css/index.less';
 
-
 export default class ImgList extends Component {
-
+    static defaultProps = {
+        maxShowNum: 4,
+        maxLength: 10,
+        editable: false,
+        images: []
+    };
     constructor (props, context) {
         super(props, context)
+        // get viewport size
         this.screen = window.screen
-
         this.state = {
-            imgIndex: null,
+            isEditAble: this.props.editable,
+            images: this.props.images,
+            imgIndex: 0,
             showImgListFull: false,
             sliderStyles: null,
             sliderItemStyle: {
@@ -20,28 +26,58 @@ export default class ImgList extends Component {
                 height: this.screen.height+'px'
             }
         }
-        // get view port
     }
 
     componentDidMount () {
 
     }
+
     componentWillUnmount() {
 
     }
+
     componentWillReceiveProps (nextProps) {
-
+        this.state = {
+            isEditAble: nextProps.editable || false,
+            images: nextProps.images || [],
+            sliderItemStyle: {
+                width: this.screen.width+'px',
+                height: this.screen.height+'px'
+            }
+        }
     }
-
-    deleteItem(item, evt) {
-        console.log("delete", evt, item)
+    // delete
+    deleteItem(index, evt) {
         evt.preventDefault()
         evt.stopPropagation()
+        index = index == undefined ? this.state.imgIndex : index
+        let _index = -1;
+        let images = this.state.images;
+        images.forEach((d, i)=>{
+            if( index== i){
+                _index = i;
+            }
+        });
+        if(_index != -1){
+            images.splice(_index, 1)
+            this.setState({
+                imgIndex: 0,
+                images: images
+            })
+        }
+        if(this.state.showImgListFull){
+            this.viewImg(0);
+        }
+        return false
+    }
+    // export get images api
+    getImages(){
+        return this.props.images
     }
 
-    viewImg(index, evt) {
+    viewImg(index) {
         // 计算宽高 & transation
-        const fullWidth = (this.props.files.length||0)* this.screen.width
+        const fullWidth = (this.props.images.length||0) * this.screen.width
         const transLeft = -1 * this.screen.width * index || 0
         this.setState({
             showImgListFull: true,
@@ -49,7 +85,7 @@ export default class ImgList extends Component {
             sliderStyles: {
                 width: fullWidth +'px',
                 height: (this.screen.height || 0) + 'px',
-                transform: `translate(${transLeft}px, 0px) translateZ(0px)`
+                // transform: `translate(${transLeft}px, 0) translateZ(0)`
             }
         })
 
@@ -60,41 +96,58 @@ export default class ImgList extends Component {
             sliderStyles: null
         })
     }
+    swipeDoneHandler(curIndex){
+        curIndex != undefined && this.setState({
+            imgIndex: curIndex
+        })
+    }
     render() {
-        const  {files} = this.props;
+        const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
         return (
             <div className="ph-img-list">
                 {
-                    files.slice(0,4).map((item, index) => (
+                    images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
                         <div key={item.id} className="ph-img-item">
                             <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
                                 <img className="ph-img" src={item.url} alt={item.name}/>
                             </div>
-                            <div className="ph-img-option"><span className="ph-img-delete" onClick={this.deleteItem.bind(this, item)}></span></div>
+                            {
+                                isEditAble && <div className="ph-img-option">
+                                    <span className="ph-img-delete" onClick={this.deleteItem.bind(this, index)}></span>
+                                </div>
+                            }
                         </div>
-                    ))
+                    ))):(
+                        <div className="ph-img-empty"><p>暂无可供展示的图片</p></div>
+                    )
                 }
-                <div className="ph-img-count">{files.length}</div>
+                {
+                    !isEditAble && images.length > this.props.maxShowNum && <div className="ph-img-count">{images.length}</div>
+                }
                 <Modal className="ph-img-slider-modal">
-                    { this.state.showImgListFull === true &&
+                    { showImgListFull === true &&
                         <div className="ph-img-slider">
-                            <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
-                                {
-                                    files.map((item, index) => (
-                                        <div key={item.id} className="ph-img-item" style={this.state.sliderItemStyle}>
-                                            <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
-                                                <img className="ph-img" src={item.url} alt={item.name}/>
+                            <Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}>
+                                <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
+                                    {
+                                        images.map((item, index) => (
+                                            <div key={item.id} className="ph-img-item" style={this.state.sliderItemStyle}>
+                                                <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
+                                                    <img className="ph-img " src={item.url} alt={item.name}/>
+                                                </div>
                                             </div>
-                                            <div className="ph-img-option"><span className="ph-img-delete" onClick={this.closeModal.bind(this)}></span></div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </Swiper>
                             <div className="ph-img-slider-option">
-                                <a href="javascript:;" className="ph-img-close" onClick={this.closeModal.bind(this)}>关闭</a>
-                                <a href="javascript:;" className="ph-img-delete">删除</a>
-                                <span className="ph-img-cur">{(this.state.imgIndex||0)+1}</span>
-                                <span className="ph-img-count">/{files.length}</span>
+                                <p className="ph-img-close"><a href="javascript:;" onClick={this.closeModal.bind(this)}>关闭</a></p>
+                                <p className="ph-img-delete">{
+                                    this.state.isEditAble &&
+                                    <a href="javascript:;" onClick={this.deleteItem.bind(this, undefined)}>删除</a>
+                                }</p>
+                                <span className="ph-img-cur">{(imgIndex||0)+1}</span>
+                                <span className="ph-img-count">/{images.length}</span>
                             </div>
                         </div>
                     }
