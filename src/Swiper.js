@@ -1,15 +1,23 @@
-import React, {Component} from 'react'
+import React, {PropTypes, Component} from 'react'
 import classNames from 'classnames';
 
 export default class Swiper extends Component {
+
+    static propTypes = {
+        swipeDone: PropTypes.func,
+        curIndex: PropTypes.number,
+        count: PropTypes.number
+    };
+
     static defaultProps = {
         swipeDone: function(){},
-        curIndex: 0
-    }
+        curIndex: 0,
+        count: 0
+    };
 
     constructor(props, context){
-        super(props, context)
-        this.screen = window.screen
+        super(props, context);
+        this.screen = window.screen;
         this.state = {
             distance: this.screen.width * this.props.curIndex,
             count: this.props.count,
@@ -69,11 +77,11 @@ export default class Swiper extends Component {
         this.setState({
             distance: curIndex * clientWidth,
             swipeClass: 'ph-img-slider-animation'
-        })
+        });
         this.props.swipeDone && this.props.swipeDone(curIndex)
     }
     render () {
-        const {distance, swipeClass} = this.state
+        const {distance, swipeClass} = this.state;
         const className = classNames((this.props.children.props.className || ''), swipeClass);
         const styles = {
             transform : `translate(-${distance}px, 0) translateZ(0)`

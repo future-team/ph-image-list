@@ -1,0 +1,245 @@
+{
+    "project": {
+        "name": "ph-image-list",
+        "version": "0.1.0",
+        "url": "",
+        "navs": [
+            {
+                "name": "主页",
+                "url": ""
+            }
+        ]
+    },
+    "files": {
+        "src/ImgList.js": {
+            "name": "src/ImgList.js",
+            "modules": {
+                "ImgList": 1
+            },
+            "classes": {
+                "ImgList": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "ImgList": {
+            "name": "ImgList",
+            "submodules": {},
+            "classes": {
+                "ImgList": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/ImgList.js",
+            "line": 13,
+            "description": "- 图片查看组件提供图片列表展示及全屏查看功能<br/>\n- 在设置 `editable` 为 `true` 的情况下可删除图片列表里的图片<br/>\n- 可以通过 maxShowNum 设置显示的图片个数<br/>\n主要属性和接口：",
+            "itemtype": "method",
+            "extends": "Component",
+            "is_constructor": 1,
+            "example": [],
+            "exampleTitles": [],
+            "return": {
+                "description": "",
+                "type": "*|Array|HTMLCollection"
+            }
+        }
+    },
+    "classes": {
+        "ImgList": {
+            "name": "ImgList",
+            "shortname": "ImgList",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ImgList",
+            "file": "src/ImgList.js",
+            "line": 13,
+            "description": "- 图片查看组件提供图片列表展示及全屏查看功能<br/>\n- 在设置 `editable` 为 `true` 的情况下可删除图片列表里的图片<br/>\n- 可以通过 maxShowNum 设置显示的图片个数<br/>\n主要属性和接口：",
+            "extends": "Component",
+            "is_constructor": 1,
+            "example": [],
+            "exampleTitles": []
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/ImgList.js",
+            "line": 26,
+            "type": "{{maxShowNum: (*|string|boolean|is.number|t.exports.number|e.exports.number), editable: *, images: *, swipeDoneCallback: (*|!Function|null), deleteDoneCallback: (*|!Function|null)}}",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 31,
+            "description": "最多显示个数",
+            "itemtype": "property",
+            "name": "maxShowNum",
+            "type": "number",
+            "default": "4",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 39,
+            "description": "是否允许删除",
+            "itemtype": "property",
+            "name": "editable",
+            "type": "boolean",
+            "default": "false",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 47,
+            "description": "查看的图片列表",
+            "itemtype": "property",
+            "name": "images",
+            "type": "array",
+            "default": "[]",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 55,
+            "description": "全屏查看翻页的回调",
+            "itemtype": "property",
+            "name": "swipeDoneCallback",
+            "type": "function",
+            "default": "function(){}",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 63,
+            "description": "可删除时删成功时的回调",
+            "itemtype": "property",
+            "name": "deleteDoneCallback",
+            "type": "function",
+            "default": "function(){}",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 97,
+            "params": [
+                {
+                    "name": "nextProps",
+                    "description": ""
+                }
+            ],
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 112,
+            "description": "delete item",
+            "params": [
+                {
+                    "name": "index",
+                    "description": ""
+                },
+                {
+                    "name": "evt",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 155,
+            "description": "view img handler",
+            "params": [
+                {
+                    "name": "index",
+                    "description": ""
+                }
+            ],
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 174,
+            "description": "close modal",
+            "class": "ImgList",
+            "module": "ImgList"
+        },
+        {
+            "file": "src/ImgList.js",
+            "line": 184,
+            "description": "swiper handler",
+            "params": [
+                {
+                    "name": "curIndex",
+                    "description": ""
+                }
+            ],
+            "class": "ImgList",
+            "module": "ImgList"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: demo",
+            "line": " src/ImgList.js:13"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/ImgList.js:112"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ImgList.js:143"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " src/ImgList.js:143"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/ImgList.js:143"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/ImgList.js:26"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/ImgList.js:97"
+        },
+        {
+            "message": "Missing item type\ndelete item",
+            "line": " src/ImgList.js:112"
+        },
+        {
+            "message": "Missing item type\nview img handler",
+            "line": " src/ImgList.js:155"
+        },
+        {
+            "message": "Missing item type\nclose modal",
+            "line": " src/ImgList.js:174"
+        },
+        {
+            "message": "Missing item type\nswiper handler",
+            "line": " src/ImgList.js:184"
+        }
+    ]
+}

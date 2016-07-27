@@ -2,19 +2,85 @@ import React,{PropTypes,Component} from 'react'
 import Modal from './Modal'
 import Swiper from './Swiper'
 
-import '../css/index.less';
+import '../css/index.less'
 
+const loop = function(){};
+const imageItem = PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+});
+/**
+ *  - 图片查看组件提供图片列表展示及全屏查看功能<br/>
+ *  - 在设置 `editable` 为 `true` 的情况下可删除图片列表里的图片<br/>
+ *  - 可以通过 maxShowNum 设置显示的图片个数<br/>
+ *  主要属性和接口：
+ *  @class ImgList
+ *  @module ImgList
+ *  @extends Component
+ *  @constructor
+ *  @demo ImgList.js {源码}
+ * */
 export default class ImgList extends Component {
+
+    /**
+     *
+     * @type {{maxShowNum: (*|string|boolean|is.number|t.exports.number|e.exports.number), editable: *, images: *, swipeDoneCallback: (*|!Function|null), deleteDoneCallback: (*|!Function|null)}}
+     */
+    static propTypes = {
+        /**
+         * 最多显示个数
+         * @property maxShowNum
+         * @type number
+         * @default 4
+         * */
+        maxShowNum: PropTypes.number,
+
+        /**
+         * 是否允许删除
+         * @property  editable
+         * @type boolean
+         * @default false
+         */
+        editable: PropTypes.bool,
+
+        /**
+         * 查看的图片列表
+         * @property  images
+         * @type array
+         * @default []
+         */
+        images: PropTypes.arrayOf(imageItem).isRequired,
+
+        /**
+         * 全屏查看翻页的回调
+         * @property  swipeDoneCallback
+         * @type function
+         * @default function(index){}
+         */
+        swipeDoneCallback: PropTypes.func,
+
+        /**
+         * 可删除时删成功时的回调
+         * @property  deleteDoneCallback
+         * @type function
+         * @default function(index, item){}
+         */
+        deleteDoneCallback: PropTypes.func
+    }
+
     static defaultProps = {
         maxShowNum: 4,
-        maxLength: 10,
         editable: false,
-        images: []
-    };
+        images: [],
+        swipeDoneCallback: loop,
+        deleteDoneCallback: loop
+    }
+
     constructor (props, context) {
-        super(props, context)
+        super(props, context);
         // get viewport size
-        this.screen = window.screen
+        this.screen = window.screen;
         this.state = {
             isEditAble: this.props.editable,
             images: this.props.images,
@@ -28,14 +94,10 @@ export default class ImgList extends Component {
         }
     }
 
-    componentDidMount () {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
+    /**
+     *
+     * @param nextProps
+     */
     componentWillReceiveProps (nextProps) {
         this.state = {
             isEditAble: nextProps.editable || false,
@@ -46,60 +108,85 @@ export default class ImgList extends Component {
             }
         }
     }
-    // delete
+
+    /**
+     * delete item
+     * @param index
+     * @param evt
+     * @returns {boolean}
+     */
     deleteItem(index, evt) {
-        evt.preventDefault()
-        evt.stopPropagation()
-        index = index == undefined ? this.state.imgIndex : index
-        let _index = -1;
+        evt.preventDefault();
+        evt.stopPropagation();
+        index = index == undefined ? this.state.imgIndex : index;
+        let _index = -1, _item = null;
         let images = this.state.images;
         images.forEach((d, i)=>{
             if( index== i){
                 _index = i;
+                _item = d;
             }
         });
         if(_index != -1){
-            images.splice(_index, 1)
+            images.splice(_index, 1);
             this.setState({
                 imgIndex: 0,
                 images: images
-            })
+            });
+            this.props.deleteDoneCallback.call(this, _index, _item)
         }
         if(this.state.showImgListFull){
             this.viewImg(0);
         }
         return false
     }
-    // export get images api
+    /**
+     *  @demo ImgList.js {源码}
+     *  @returns {*|Array|HTMLCollection}
+     */
     getImages(){
-        return this.props.images
+        return this.props.images || []
     }
 
+    /**
+     * view img handler
+     * @param index
+     */
     viewImg(index) {
         // 计算宽高 & transation
-        const fullWidth = (this.props.images.length||0) * this.screen.width
-        const transLeft = -1 * this.screen.width * index || 0
+        const fullWidth = (this.props.images.length||0) * this.screen.width;
         this.setState({
             showImgListFull: true,
             imgIndex: index,
             sliderStyles: {
                 width: fullWidth +'px',
-                height: (this.screen.height || 0) + 'px',
-                // transform: `translate(${transLeft}px, 0) translateZ(0)`
+                height: (this.screen.height || 0) + 'px'
             }
         })
 
     }
+
+    /**
+     * close modal
+     */
     closeModal() {
         this.setState({
             showImgListFull: false,
             sliderStyles: null
         })
     }
+
+    /**
+     * swiper handler
+     * @param curIndex
+     */
     swipeDoneHandler(curIndex){
-        curIndex != undefined && this.setState({
-            imgIndex: curIndex
-        })
+        curIndex != undefined && (
+            this.setState({
+                imgIndex: curIndex
+            }),
+            this.props.swipeDoneCallback.call(this, curIndex)
+        )
     }
     render() {
         const  {images, imgIndex, showImgListFull, isEditAble} = this.state;

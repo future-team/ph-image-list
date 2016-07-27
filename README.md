@@ -1,26 +1,34 @@
 # ph-image-list
+image list to show
 
-图片列表展示组件
-
-## 使用
-
-- 下载此项目至本地，修改项目名称和package.json里的信息；
-- git remote rm origin
-- git remote add origin {你的仓库地址}  例如：git remote add origin git@code.dianpingoa.com:pc-trade-f2e/apollo-template-static.git
-- git fetch
-- git pull origin master
-
-- 全局安装smartDoc 用于生成文档
-
-## Command
-
-```bash
-#测试
-npm run test
-#打包
-npm run build
-#例子演示
-npm run demo
+```jsx
+<ImgList images={imgs1}
+     editable={editable}
+     deleteDoneCallback={this.deleteDoneCallback}
+     swipeDoneCallback={this.swipeDoneCallback}}></ImgList>
 ```
 
+## ImgList API
+View [example](/example/src/index.js) to get more details
 
+#### `<ImgList>` Props:
+- maxShowNum is used to set default show image number.
+- editable is used to set list item is deletable.
+- images is used to define how many images can show.
+- swipeDoneCallback is used to handler swipe done when full screen watch image.
+- deleteDoneCallback: is used to handler delete done when that is editable
+
+And if you want to get image list after delete some,you can call `ImgList.getImages()`.
+
+### Contributing
+
+- Fork the project
+- Run the project in development view demo: `$ npm run demo`
+- Make changes.
+- Add appropriate tests
+- `$ npm run test`
+- If tests don't pass, make them pass.
+- Update README with appropriate docs.
+- Rnn build
+- `$ npm run build`
+- Commit and PR.

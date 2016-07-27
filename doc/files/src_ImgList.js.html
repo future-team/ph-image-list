@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/ImgList.js - ph-image-list</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="">
+             
+            <img alt="ph-image-list" src="../assets/css/logo.png" title="ph-image-list">
+            
+                ph-image-list
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="">主页</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl id="sidebar_list">
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/ImgList.html">ImgList</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/ImgList.html">ImgList</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+    <div class="stdoc-content">
+        <!--     <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-inherited" class="checkbox">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected" class="checkbox">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private" class="checkbox">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+ -->
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>src/ImgList.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+import React,{PropTypes,Component} from &#x27;react&#x27;
+import Modal from &#x27;./Modal&#x27;
+import Swiper from &#x27;./Swiper&#x27;
+
+import &#x27;../css/index.less&#x27;
+
+const loop = function(){};
+const imageItem = PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+});
+/**
+ *  - 图片查看组件提供图片列表展示及全屏查看功能&lt;br/&gt;
+ *  - 在设置 &#x60;editable&#x60; 为 &#x60;true&#x60; 的情况下可删除图片列表里的图片&lt;br/&gt;
+ *  - 可以通过 maxShowNum 设置显示的图片个数&lt;br/&gt;
+ *  主要属性和接口：
+ *  @class ImgList
+ *  @module ImgList
+ *  @extends Component
+ *  @constructor
+ *  @demo ImgList.js {源码}
+ * */
+export default class ImgList extends Component {
+
+    /**
+     *
+     * @type {{maxShowNum: (*|string|boolean|is.number|t.exports.number|e.exports.number), editable: *, images: *, swipeDoneCallback: (*|!Function|null), deleteDoneCallback: (*|!Function|null)}}
+     */
+    static propTypes = {
+        /**
+         * 最多显示个数
+         * @property maxShowNum
+         * @type number
+         * @default 4
+         * */
+        maxShowNum: PropTypes.number,
+
+        /**
+         * 是否允许删除
+         * @property  editable
+         * @type boolean
+         * @default false
+         */
+        editable: PropTypes.bool,
+
+        /**
+         * 查看的图片列表
+         * @property  images
+         * @type array
+         * @default []
+         */
+        images: PropTypes.arrayOf(imageItem).isRequired,
+
+        /**
+         * 全屏查看翻页的回调
+         * @property  swipeDoneCallback
+         * @type function
+         * @default function(){}
+         */
+        swipeDoneCallback: PropTypes.func,
+
+        /**
+         * 可删除时删成功时的回调
+         * @property  deleteDoneCallback
+         * @type function
+         * @default function(){}
+         */
+        deleteDoneCallback: PropTypes.func
+    }
+
+    static defaultProps = {
+        maxShowNum: 4,
+        editable: false,
+        images: [],
+        swipeDoneCallback: loop,
+        deleteDoneCallback: loop
+    }
+
+    constructor (props, context) {
+        super(props, context);
+        // get viewport size
+        this.screen = window.screen;
+        this.state = {
+            isEditAble: this.props.editable,
+            images: this.props.images,
+            imgIndex: 0,
+            showImgListFull: false,
+            sliderStyles: null,
+            sliderItemStyle: {
+                width: this.screen.width+&#x27;px&#x27;,
+                height: this.screen.height+&#x27;px&#x27;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param nextProps
+     */
+    componentWillReceiveProps (nextProps) {
+        this.state = {
+            isEditAble: nextProps.editable || false,
+            images: nextProps.images || [],
+            sliderItemStyle: {
+                width: this.screen.width+&#x27;px&#x27;,
+                height: this.screen.height+&#x27;px&#x27;
+            }
+        }
+    }
+
+    /**
+     * delete item
+     * @param index
+     * @param evt
+     * @returns {boolean}
+     */
+    deleteItem(index, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        index = index == undefined ? this.state.imgIndex : index;
+        let _index = -1, _item = null;
+        let images = this.state.images;
+        images.forEach((d, i)=&gt;{
+            if( index== i){
+                _index = i;
+                _item = d;
+            }
+        });
+        if(_index != -1){
+            images.splice(_index, 1);
+            this.setState({
+                imgIndex: 0,
+                images: images
+            });
+            this.props.deleteDoneCallback.call(this, _index, _item)
+        }
+        if(this.state.showImgListFull){
+            this.viewImg(0);
+        }
+        return false
+    }
+    /**
+     *  @function ImgList
+     *  @module ImgList
+     *  @extends Component
+     *  @constructor
+     *  @demo ImgList.js {源码}
+     * @returns {*|Array|HTMLCollection}
+     */
+    getImages(){
+        return this.props.images || []
+    }
+
+    /**
+     * view img handler
+     * @param index
+     */
+    viewImg(index) {
+        // 计算宽高 &amp; transation
+        const fullWidth = (this.props.images.length||0) * this.screen.width;
+        const transLeft = -1 * this.screen.width * index || 0;
+        this.setState({
+            showImgListFull: true,
+            imgIndex: index,
+            sliderStyles: {
+                width: fullWidth +&#x27;px&#x27;,
+                height: (this.screen.height || 0) + &#x27;px&#x27;
+            }
+        })
+
+    }
+
+    /**
+     * close modal
+     */
+    closeModal() {
+        this.setState({
+            showImgListFull: false,
+            sliderStyles: null
+        })
+    }
+
+    /**
+     * swiper handler
+     * @param curIndex
+     */
+    swipeDoneHandler(curIndex){
+        curIndex != undefined &amp;&amp; (
+            this.setState({
+                imgIndex: curIndex
+            }),
+            this.props.swipeDoneCallback.call(this, curIndex)
+        )
+    }
+    render() {
+        const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
+        return (
+            &lt;div className=&quot;ph-img-list&quot;&gt;
+                {
+                    images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) =&gt; (
+                        &lt;div key={item.id} className=&quot;ph-img-item&quot;&gt;
+                            &lt;div className=&quot;ph-img-ctn&quot; onClick={this.viewImg.bind(this, index)}&gt;
+                                &lt;img className=&quot;ph-img&quot; src={item.url} alt={item.name}/&gt;
+                            &lt;/div&gt;
+                            {
+                                isEditAble &amp;&amp; &lt;div className=&quot;ph-img-option&quot;&gt;
+                                    &lt;span className=&quot;ph-img-delete&quot; onClick={this.deleteItem.bind(this, index)}&gt;&lt;/span&gt;
+                                &lt;/div&gt;
+                            }
+                        &lt;/div&gt;
+                    ))):(
+                        &lt;div className=&quot;ph-img-empty&quot;&gt;&lt;p&gt;暂无可供展示的图片&lt;/p&gt;&lt;/div&gt;
+                    )
+                }
+                {
+                    !isEditAble &amp;&amp; images.length &gt; this.props.maxShowNum &amp;&amp; &lt;div className=&quot;ph-img-count&quot;&gt;{images.length}&lt;/div&gt;
+                }
+                &lt;Modal className=&quot;ph-img-slider-modal&quot;&gt;
+                    { showImgListFull === true &amp;&amp;
+                    &lt;div className=&quot;ph-img-slider&quot;&gt;
+                        &lt;Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}&gt;
+                            &lt;div className=&quot;ph-img-slider-ctn&quot; style={this.state.sliderStyles}&gt;
+                                {
+                                    images.map((item, index) =&gt; (
+                                        &lt;div key={item.id} className=&quot;ph-img-item&quot; style={this.state.sliderItemStyle}&gt;
+                                            &lt;div className=&quot;ph-img-ctn&quot; style={{&#x27;lineHeight&#x27;: this.state.sliderItemStyle.height}}&gt;
+                                                &lt;img className=&quot;ph-img &quot; src={item.url} alt={item.name}/&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    ))
+                                }
+                            &lt;/div&gt;
+                        &lt;/Swiper&gt;
+                        &lt;div className=&quot;ph-img-slider-option&quot;&gt;
+                            &lt;p className=&quot;ph-img-close&quot;&gt;&lt;a href=&quot;javascript:;&quot; onClick={this.closeModal.bind(this)}&gt;关闭&lt;/a&gt;&lt;/p&gt;
+                            &lt;p className=&quot;ph-img-delete&quot;&gt;{
+                                this.state.isEditAble &amp;&amp;
+                                &lt;a href=&quot;javascript:;&quot; onClick={this.deleteItem.bind(this, undefined)}&gt;删除&lt;/a&gt;
+                            }&lt;/p&gt;
+                            &lt;span className=&quot;ph-img-cur&quot;&gt;{(imgIndex||0)+1}&lt;/span&gt;
+                            &lt;span className=&quot;ph-img-count&quot;&gt;/{images.length}&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    }
+                &lt;/Modal&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+    </pre>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

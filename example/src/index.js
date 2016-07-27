@@ -13,7 +13,8 @@ const imgs1 = [{
 },{
     id: 3,
     url: './imgs/3.jpg',
-    name: 'ccc'
+    name: 'ccc',
+    extra: 'asdasd'
 },{
     id: 4,
     url: './imgs/4.jpg',
@@ -89,11 +90,17 @@ export default class Demo extends React.Component {
     }
     toggleEdit() {
         this.setState({
-            editable: !this.state.editable,
+            editable: !this.state.editable
         })
     }
     getStableImgs(){
         console.log(this.imgList1.getImages(), this.imgList2.getImages())
+    }
+    swipeDoneCallback(index) {
+        console.log('翻页', index)
+    }
+    deleteDoneCallback(index, item){
+        console.log('删除', index, item)
     }
     render () {
         const {imgs1, imgs2, editable} = this.state
@@ -105,7 +112,11 @@ export default class Demo extends React.Component {
                     <button onClick={this.toggleEdit.bind(this)}>{editable? '不能' : '能'}编辑</button>
                     <button onClick={this.getStableImgs.bind(this)}>获取编辑后的照片</button>
                 </div>
-                <ImgList images={imgs1} editable={editable} ref={(imgList)=>{
+                <ImgList images={imgs1}
+                         editable={editable}
+                         deleteDoneCallback={this.deleteDoneCallback}
+                         swipeDoneCallback={this.swipeDoneCallback}
+                         ref={(imgList)=>{
                             this.imgList1 = imgList;
                         }}></ImgList>
                 <br/>
@@ -117,7 +128,11 @@ export default class Demo extends React.Component {
                 <br/>
                 <br/>
                 <br/>
-                <ImgList images={imgs2} editable="false"ref={(imgList)=>{
+                <ImgList images={imgs2}
+                         editable={true}
+                         deleteDoneCallback={this.deleteDoneCallback}
+                         swipeDoneCallback={this.swipeDoneCallback}
+                         ref={(imgList)=>{
                             this.imgList2 = imgList;
                         }}></ImgList>
             </div>
@@ -129,7 +144,7 @@ export default class Demo extends React.Component {
 
 
 ReactDom.render(
-        <Demo></Demo>
+    <Demo></Demo>
     , document.getElementById('root')
 )
 

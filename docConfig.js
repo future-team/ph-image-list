@@ -1,8 +1,8 @@
-var config = require('package.json');
+var config = require('./package.json');
 
 module.exports = {
     //扫描的文件路径
-    paths: ['lib/'],
+    paths: ['src/'],
     demoDir:"example/",
     //文档页面输出路径
     outdir: 'doc/',
