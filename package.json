@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/future-team/ph-image-list.git"
   },
+  "main": "lib/",
   "author": {
     "name": "genffy",
     "email": "lee.genffy@gmail.com"
