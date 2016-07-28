@@ -3,61 +3,74 @@ import ReactDom from 'react/lib/ReactDOM'
 import {ImgList} from '../../src/index.js'
 
 const imgs1 = [{
-    id: 1,
+    fileId: 1,
     url: './imgs/1.jpg',
-    name: 'aaa'
+    fileName: 'aaa',
+    thumbUrl: './imgs/1.jpg'
 },{
-    id: 2,
+    fileId: 2,
     url: './imgs/2.jpg',
-    name: 'bbb'
+    fileName: 'bbb',
+    thumbUrl: './imgs/2.jpg'
 },{
-    id: 3,
+    fileId: 3,
     url: './imgs/3.jpg',
-    name: 'ccc',
-    extra: 'asdasd'
+    fileName: 'ccc',
+    extra: 'asdasd',
+    thumbUrl: './imgs/3.jpg'
 },{
-    id: 4,
+    fileId: 4,
     url: './imgs/4.jpg',
-    name: 'ddd'
+    fileName: 'ddd',
+    thumbUrl: './imgs/4.jpg'
 },{
-    id: 5,
+    fileId: 5,
     url: './imgs/5.jpg',
-    name: 'eee'
+    fileName: 'eee',
+    thumbUrl: './imgs/5.jpg'
 },{
-    id: 6,
+    fileId: 6,
     url: './imgs/6.jpg',
-    name: 'fff'
+    fileName: 'fff',
+    thumbUrl: './imgs/6.jpg'
 },{
-    id: 7,
+    fileId: 7,
     url: './imgs/7.png',
-    name: 'ggg'
+    fileName: 'ggg',
+    thumbUrl: './imgs/7.png'
 },{
-    id: 8,
+    fileId: 8,
     url: './imgs/8.jpg',
-    name: 'hhh'
+    fileName: 'hhh',
+    thumbUrl: './imgs/8.jpg'
 },{
-    id: 9,
+    fileId: 9,
     url: './imgs/9.jpg',
-    name: 'iii'
+    fileName: 'iii',
+    thumbUrl: './imgs/9.jpg'
 }]
 
 const imgs2 = [
     {
-        id: 6,
+        fileId: 6,
         url: './imgs/6.jpg',
-        name: 'fff'
+        fileName: 'fff',
+        thumbUrl: './imgs/6.jpg'
     },{
-        id: 7,
+        fileId: 7,
         url: './imgs/7.png',
-        name: 'ggg'
+        fileName: 'ggg',
+        thumbUrl: './imgs/7.png'
     },{
-        id: 8,
+        fileId: 8,
         url: './imgs/8.jpg',
-        name: 'hhh'
+        fileName: 'hhh',
+        thumbUrl: './imgs/8.jpg'
     },{
-        id: 9,
+        fileId: 9,
         url: './imgs/9.jpg',
-        name: 'iii'
+        fileName: 'iii',
+        thumbUrl: './imgs/9.jpg'
     }
 ]
 

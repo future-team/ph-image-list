@@ -6,9 +6,10 @@ import '../css/index.less'
 
 const loop = function(){};
 const imageItem = PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    fileId: PropTypes.number.isRequired,
+    fileName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    thumbUrl: PropTypes.string.isRequired
 });
 /**
  *  - 图片查看组件提供图片列表展示及全屏查看功能<br/>
@@ -194,9 +195,9 @@ export default class ImgList extends Component {
             <div className="ph-img-list">
                 {
                     images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
-                        <div key={item.id} className="ph-img-item">
+                        <div key={item.fileId} className="ph-img-item">
                             <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
-                                <img className="ph-img" src={item.url} alt={item.name}/>
+                                <img className="ph-img" src={item.thumbUrl} alt={item.fileName}/>
                             </div>
                             {
                                 isEditAble && <div className="ph-img-option">
@@ -218,9 +219,9 @@ export default class ImgList extends Component {
                             <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
                                 {
                                     images.map((item, index) => (
-                                        <div key={item.id} className="ph-img-item" style={this.state.sliderItemStyle}>
+                                        <div key={item.fileId} className="ph-img-item" style={this.state.sliderItemStyle}>
                                             <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
-                                                <img className="ph-img " src={item.url} alt={item.name}/>
+                                                <img className="ph-img " src={item.url} alt={item.fileName}/>
                                             </div>
                                         </div>
                                     ))

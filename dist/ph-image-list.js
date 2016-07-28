@@ -105,9 +105,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var loop = function loop() {};
 	var imageItem = _react.PropTypes.shape({
-	    id: _react.PropTypes.number.isRequired,
+	    fileId: _react.PropTypes.number.isRequired,
+	    fileName: _react.PropTypes.string.isRequired,
 	    url: _react.PropTypes.string.isRequired,
-	    name: _react.PropTypes.string.isRequired
+	    thumbUrl: _react.PropTypes.string.isRequired
 	});
 	/**
 	 *  - 图片查看组件提供图片列表展示及全屏查看功能<br/>
@@ -318,11 +319,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            images.length ? (isEditAble ? images : images.slice(0, this.props.maxShowNum)).map(function (item, index) {
 	                return _react2['default'].createElement(
 	                    'div',
-	                    { key: item.id, className: 'ph-img-item' },
+	                    { key: item.fileId, className: 'ph-img-item' },
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'ph-img-ctn', onClick: _this.viewImg.bind(_this, index) },
-	                        _react2['default'].createElement('img', { className: 'ph-img', src: item.url, alt: item.name })
+	                        _react2['default'].createElement('img', { className: 'ph-img', src: item.thumbUrl, alt: item.fileName })
 	                    ),
 	                    isEditAble && _react2['default'].createElement(
 	                        'div',
@@ -359,11 +360,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            images.map(function (item, index) {
 	                                return _react2['default'].createElement(
 	                                    'div',
-	                                    { key: item.id, className: 'ph-img-item', style: _this.state.sliderItemStyle },
+	                                    { key: item.fileId, className: 'ph-img-item', style: _this.state.sliderItemStyle },
 	                                    _react2['default'].createElement(
 	                                        'div',
 	                                        { className: 'ph-img-ctn', style: { 'lineHeight': _this.state.sliderItemStyle.height } },
-	                                        _react2['default'].createElement('img', { className: 'ph-img ', src: item.url, alt: item.name })
+	                                        _react2['default'].createElement('img', { className: 'ph-img ', src: item.url, alt: item.fileName })
 	                                    )
 	                                );
 	                            })
