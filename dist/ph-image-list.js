@@ -331,20 +331,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        _react2['default'].createElement('span', { className: 'ph-img-delete', onClick: _this.deleteItem.bind(_this, index) })
 	                    )
 	                );
-	            }) : _react2['default'].createElement(
-	                'div',
-	                { className: 'ph-img-empty' },
-	                _react2['default'].createElement(
-	                    'p',
-	                    null,
-	                    '暂无可供展示的图片'
-	                )
-	            ),
+	            }) : "",
 	            !isEditAble && images.length > this.props.maxShowNum && _react2['default'].createElement(
 	                'div',
 	                { className: 'ph-img-count' },
 	                images.length
 	            ),
+	            this.props.children,
 	            _react2['default'].createElement(
 	                _Modal2['default'],
 	                { className: 'ph-img-slider-modal' },
