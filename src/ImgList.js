@@ -205,13 +205,12 @@ export default class ImgList extends Component {
                                 </div>
                             }
                         </div>
-                    ))):(
-                        <div className="ph-img-empty"><p>暂无可供展示的图片</p></div>
-                    )
+                    ))):""
                 }
                 {
                     !isEditAble && images.length > this.props.maxShowNum && <div className="ph-img-count">{images.length}</div>
                 }
+                {this.props.children}
                 <Modal className="ph-img-slider-modal">
                     { showImgListFull === true &&
                     <div className="ph-img-slider">
