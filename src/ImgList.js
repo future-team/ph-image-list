@@ -215,6 +215,9 @@ export default class ImgList extends Component {
                 <Modal className="ph-img-slider-modal">
                     { showImgListFull === true &&
                     <div className="ph-img-slider">
+                        <div className="ph-img-slider-option">
+                            <a className="ph-img-return" href="javascript:;" onClick={this.closeModal.bind(this)}>返回</a>
+                        </div>
                         <Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}>
                             <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>
                                 {
@@ -228,14 +231,11 @@ export default class ImgList extends Component {
                                 }
                             </div>
                         </Swiper>
-                        <div className="ph-img-slider-option">
-                            <p className="ph-img-close"><a href="javascript:;" onClick={this.closeModal.bind(this)}>关闭</a></p>
-                            <p className="ph-img-delete">{
-                                this.state.isEditAble &&
-                                <a href="javascript:;" onClick={this.deleteItem.bind(this, undefined)}>删除</a>
-                            }</p>
-                            <span className="ph-img-cur">{(imgIndex||0)+1}</span>
-                            <span className="ph-img-count">/{images.length}</span>
+                        <div className="ph-img-slider-pager">
+                            <span>
+                                <span className="ph-img-cur">{(imgIndex||0)+1}</span>
+                                <span className="ph-img-count">/{images.length}</span>
+                            </span>
                         </div>
                     </div>
                     }

@@ -133,6 +133,56 @@ export default class Demo extends React.Component {
                             this.imgList1 = imgList;
                         }}></ImgList>
                 <br/>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/><br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <br/>
                 <br/>
                 <br/>
@@ -148,6 +198,7 @@ export default class Demo extends React.Component {
                          ref={(imgList)=>{
                             this.imgList2 = imgList;
                         }}></ImgList>
+                <div className="pos-fix">就要搞点大新闻</div>
             </div>
         )
     }
