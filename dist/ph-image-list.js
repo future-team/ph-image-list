@@ -352,6 +352,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    'div',
 	                    { className: 'ph-img-slider' },
 	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'ph-img-slider-option' },
+	                        _react2['default'].createElement(
+	                            'a',
+	                            { className: 'ph-img-return', href: 'javascript:;', onClick: this.closeModal.bind(this) },
+	                            '返回'
+	                        )
+	                    ),
+	                    _react2['default'].createElement(
 	                        _Swiper2['default'],
 	                        { count: images.length, curIndex: imgIndex, swipeDone: this.swipeDoneHandler.bind(this) },
 	                        _react2['default'].createElement(
@@ -372,35 +381,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    ),
 	                    _react2['default'].createElement(
 	                        'div',
-	                        { className: 'ph-img-slider-option' },
+	                        { className: 'ph-img-slider-pager' },
 	                        _react2['default'].createElement(
-	                            'p',
-	                            { className: 'ph-img-close' },
+	                            'span',
+	                            null,
 	                            _react2['default'].createElement(
-	                                'a',
-	                                { href: 'javascript:;', onClick: this.closeModal.bind(this) },
-	                                '关闭'
+	                                'span',
+	                                { className: 'ph-img-cur' },
+	                                (imgIndex || 0) + 1
+	                            ),
+	                            _react2['default'].createElement(
+	                                'span',
+	                                { className: 'ph-img-count' },
+	                                '/',
+	                                images.length
 	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'p',
-	                            { className: 'ph-img-delete' },
-	                            this.state.isEditAble && _react2['default'].createElement(
-	                                'a',
-	                                { href: 'javascript:;', onClick: this.deleteItem.bind(this, undefined) },
-	                                '删除'
-	                            )
-	                        ),
-	                        _react2['default'].createElement(
-	                            'span',
-	                            { className: 'ph-img-cur' },
-	                            (imgIndex || 0) + 1
-	                        ),
-	                        _react2['default'].createElement(
-	                            'span',
-	                            { className: 'ph-img-count' },
-	                            '/',
-	                            images.length
 	                        )
 	                    )
 	                )
@@ -696,7 +691,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var content = __webpack_require__(9);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -721,7 +716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: rgba(0, 0, 0, 0.8);\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-item .ph-img-option .ph-img-delete:before {\n  content: \"X\";\n  line-height: 20px;\n  color: #fff;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-option {\n  position: fixed;\n  bottom: 30px;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n  text-align: center;\n  color: #fff;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-close,\n.ph-img-slider .ph-img-slider-option .ph-img-delete {\n  width: 72px;\n  height: 30px;\n  line-height: 30px;\n  text-align: center;\n  font-size: 16px;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-close a,\n.ph-img-slider .ph-img-slider-option .ph-img-delete a {\n  display: block;\n  width: 100%;\n  height: 100%;\n  text-decoration: none;\n  color: #fff;\n  background: rgba(128, 128, 128, 0.4);\n  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3) inset;\n  border-radius: 2px;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-close {\n  float: right;\n  margin: 0 15px 0 0;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-delete {\n  float: left;\n  margin: 0 0 0 15px;\n}\n.ph-img-slider .ph-img-slider-close:before {\n  content: \"X\";\n}\n", ""]);
+	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: url(" + __webpack_require__(11) + ") 110px 0;\n  background-size: cover;\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-option,\n.ph-img-slider .ph-img-slider-pager {\n  position: fixed;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n}\n.ph-img-slider .ph-img-slider-option {\n  top: 30px;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return {\n  display: inline-block;\n  margin-left: .97rem;\n  color: #fff;\n  text-decoration: none;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return:before {\n  margin-top: 3px;\n  margin-right: 10px;\n  float: left;\n  content: \" \";\n  width: 13px;\n  height: 1.5rem;\n  line-height: 1.5rem;\n  background: url(" + __webpack_require__(11) + ") 0 0;\n  background-size: cover;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-pager {\n  bottom: 30px;\n  color: #fff;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-pager > span {\n  border: 1px solid #fff;\n  border-radius: 15px;\n  padding: 0.3rem .9rem;\n}\n", ""]);
 
 	// exports
 
@@ -784,6 +779,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAnCAYAAACL4Y8gAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjVBMjNDNzk0RDVGMTFFNjhFN0RDNTRFODIyNzRDQzQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjVBMjNDN0E0RDVGMTFFNjhFN0RDNTRFODIyNzRDQzQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNUEyM0M3NzRENUYxMUU2OEU3REM1NEU4MjI3NENDNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyNUEyM0M3ODRENUYxMUU2OEU3REM1NEU4MjI3NENDNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PveNY3IAAAlxSURBVHja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"
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
