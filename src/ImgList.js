@@ -233,7 +233,7 @@ export default class ImgList extends Component {
                     { showImgListFull === true &&
                     <div className="ph-img-slider">
                         <div className="ph-img-slider-option">
-                            <a className="ph-img-return" href="javascript:;" onClick={this.closeModal.bind(this)}>返回</a>
+                            <a className="ph-img-return" href="javascript:;" onClick={this.closeModal.bind(this)}></a>
                         </div>
                         <Swiper count={images.length} curIndex={imgIndex} swipeDone={this.swipeDoneHandler.bind(this)}>
                             <div className="ph-img-slider-ctn" style={this.state.sliderStyles}>

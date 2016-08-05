@@ -191,7 +191,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        _Component.call(this, props, context);
 	        // get viewport size
-	        this.screen = window.screen;
+	        this.screen = {
+	            width: window.screen.width,
+	            height: window.innerHeight
+	        };
 	        this.state = {
 	            isEditAble: this.props.editable,
 	            images: this.props.images,
@@ -211,6 +214,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 
 	    ImgList.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        this.screen = {
+	            width: window.screen.width,
+	            height: window.innerHeight
+	        };
 	        this.state = {
 	            isEditAble: nextProps.editable || false,
 	            images: nextProps.images || [],
@@ -219,6 +226,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	                height: this.screen.height + 'px'
 	            }
 	        };
+	    };
+
+	    ImgList.prototype.componentDidUpdate = function componentDidUpdate() {
+	        var showImgListFull = this.state.showImgListFull;
+
+	        var bodyClassName = document.getElementsByTagName('html')[0].className;
+	        if (showImgListFull && bodyClassName.indexOf('ph-img-list-body-overflow-hidden') == -1) {
+	            bodyClassName += ' ph-img-list-body-overflow-hidden';
+	        }
+	        if (!showImgListFull) {
+	            bodyClassName = bodyClassName.replace(/\bph-img-list-body-overflow-hidden\b\s*/g, '');
+	        }
+	        document.getElementsByTagName('html')[0].className = bodyClassName;
 	    };
 
 	    /**
@@ -347,11 +367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'ph-img-slider-option' },
-	                        _react2['default'].createElement(
-	                            'a',
-	                            { className: 'ph-img-return', href: 'javascript:;', onClick: this.closeModal.bind(this) },
-	                            '返回'
-	                        )
+	                        _react2['default'].createElement('a', { className: 'ph-img-return', href: 'javascript:;', onClick: this.closeModal.bind(this) })
 	                    ),
 	                    _react2['default'].createElement(
 	                        _Swiper2['default'],
@@ -551,7 +567,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.longTouch = false;
 	        setTimeout(function () {
 	            _self.longTouch = true;
-	        }, 250);
+	        }, 200);
 	        // Get the original touch position.
 	        this.touchstartx = evt.touches[0].pageX;
 	        // The movement gets all janky if there's a transition on the elements.
@@ -581,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var clientWidth = this.screen.width;
 	        var absMove = Math.abs(curIndex * clientWidth - this.movex);
 	        // Calculate the index. All other calculations are based on the index.
-	        if (absMove > clientWidth / 2 && this.longTouch === true) {
+	        if (absMove > clientWidth / 4 && this.longTouch === true) {
 	            if (this.movex > curIndex * clientWidth && curIndex < this.state.count - 1) {
 	                curIndex++;
 	            } else if (this.movex < curIndex * clientWidth && curIndex > 0) {
@@ -709,7 +725,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: url(" + __webpack_require__(11) + ") 110px 0;\n  background-size: cover;\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-option,\n.ph-img-slider .ph-img-slider-pager {\n  position: fixed;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n}\n.ph-img-slider .ph-img-slider-option {\n  top: 30px;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return {\n  display: inline-block;\n  margin-left: .97rem;\n  color: #fff;\n  text-decoration: none;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return:before {\n  margin-top: 3px;\n  margin-right: 10px;\n  float: left;\n  content: \" \";\n  width: 13px;\n  height: 1.5rem;\n  line-height: 1.5rem;\n  background: url(" + __webpack_require__(11) + ") 0 0;\n  background-size: cover;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-pager {\n  bottom: 30px;\n  color: #fff;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-pager > span {\n  border: 1px solid #fff;\n  border-radius: 15px;\n  padding: 0.3rem .9rem;\n}\n", ""]);
+	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: url(" + __webpack_require__(11) + ") 110px 0;\n  background-size: cover;\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-option,\n.ph-img-slider .ph-img-slider-pager {\n  position: fixed;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n}\n.ph-img-slider .ph-img-slider-option {\n  top: 30px;\n  text-align: right;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return {\n  display: inline-block;\n  margin-right: .97rem;\n  color: #fff;\n  text-decoration: none;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return:before {\n  margin-top: 3px;\n  float: left;\n  content: \" \";\n  width: 28px;\n  height: 28px;\n  line-height: 1.5rem;\n  background: url(" + __webpack_require__(11) + ") -35px 0;\n  background-size: cover;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-pager {\n  bottom: 30px;\n  color: #fff;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-pager > span {\n  border: 1px solid #fff;\n  border-radius: 15px;\n  padding: 0.3rem .9rem;\n}\n.ph-img-list-body-overflow-hidden {\n  overflow: hidden!important;\n}\n", ""]);
 
 	// exports
 
