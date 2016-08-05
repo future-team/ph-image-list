@@ -81,7 +81,10 @@ export default class ImgList extends Component {
     constructor (props, context) {
         super(props, context);
         // get viewport size
-        this.screen = window.screen;
+        this.screen = {
+            width: window.screen.width,
+            height: window.innerHeight
+        };
         this.state = {
             isEditAble: this.props.editable,
             images: this.props.images,
@@ -100,6 +103,10 @@ export default class ImgList extends Component {
      * @param nextProps
      */
     componentWillReceiveProps (nextProps) {
+        this.screen = {
+            width: window.screen.width,
+            height: window.innerHeight
+        };
         this.state = {
             isEditAble: nextProps.editable || false,
             images: nextProps.images || [],
@@ -109,7 +116,17 @@ export default class ImgList extends Component {
             }
         }
     }
-
+    componentDidUpdate(){
+        const {showImgListFull} = this.state;
+        let bodyClassName = document.getElementsByTagName('html')[0].className;
+        if(showImgListFull && bodyClassName.indexOf('ph-img-list-body-overflow-hidden') == -1){
+            bodyClassName += ' ph-img-list-body-overflow-hidden';
+        }
+        if(!showImgListFull){
+            bodyClassName = bodyClassName.replace(/\bph-img-list-body-overflow-hidden\b\s*/g,'')
+        }
+        document.getElementsByTagName('html')[0].className = bodyClassName;
+    }
     /**
      * delete item
      * @param index
@@ -189,6 +206,7 @@ export default class ImgList extends Component {
             this.props.swipeDoneCallback.call(this, curIndex)
         )
     }
+
     render() {
         const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
         return (

@@ -38,7 +38,7 @@ export default class Swiper extends Component {
         this.longTouch = false;
         setTimeout(function() {
             _self.longTouch = true;
-        }, 250);
+        }, 200);
         // Get the original touch position.
         this.touchstartx =  evt.touches[0].pageX;
         // The movement gets all janky if there's a transition on the elements.
@@ -66,7 +66,7 @@ export default class Swiper extends Component {
         const clientWidth = this.screen.width;
         var absMove = Math.abs(curIndex * clientWidth - this.movex);
         // Calculate the index. All other calculations are based on the index.
-        if (absMove > clientWidth/2 && this.longTouch === true) {
+        if (absMove > clientWidth/4 && this.longTouch === true) {
             if (this.movex > curIndex * clientWidth && curIndex < (this.state.count - 1)) {
                 curIndex++;
             } else if (this.movex < curIndex * clientWidth && curIndex > 0) {
