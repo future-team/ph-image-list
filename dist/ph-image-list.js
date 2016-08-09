@@ -562,6 +562,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    Swiper.prototype.onTouchStartHandler = function onTouchStartHandler(evt) {
+	        evt.preventDefault();
+	        evt.stopPropagation();
 	        var _self = this;
 	        // Test for flick.
 	        this.longTouch = false;
@@ -579,6 +581,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // TODO animation
 
 	    Swiper.prototype.onTouchMoveHandler = function onTouchMoveHandler(evt) {
+	        evt.preventDefault();
+	        evt.stopPropagation();
 	        // Continuously return touch position.
 	        this.touchmovex = evt.touches[0].pageX;
 	        // Calculate distance to translate holder.
@@ -591,7 +595,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 
-	    Swiper.prototype.onTouchEndHandler = function onTouchEndHandler() {
+	    Swiper.prototype.onTouchEndHandler = function onTouchEndHandler(evt) {
+	        evt.preventDefault();
+	        evt.stopPropagation();
 	        // Calculate the distance swiped.
 	        var curIndex = this.props.curIndex;
 	        var clientWidth = this.screen.width;

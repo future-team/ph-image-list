@@ -33,6 +33,8 @@ export default class Swiper extends Component {
     }
 
     onTouchStartHandler(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
         const _self = this;
         // Test for flick.
         this.longTouch = false;
@@ -48,6 +50,8 @@ export default class Swiper extends Component {
     }
     // TODO animation
     onTouchMoveHandler(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
         // Continuously return touch position.
         this.touchmovex =  evt.touches[0].pageX;
         // Calculate distance to translate holder.
@@ -60,7 +64,9 @@ export default class Swiper extends Component {
         }
     }
 
-    onTouchEndHandler() {
+    onTouchEndHandler(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
         // Calculate the distance swiped.
         let curIndex = this.props.curIndex;
         const clientWidth = this.screen.width;
