@@ -93,7 +93,7 @@ export default class Swiper extends Component {
         const styles = {
             'WebkitTransform': translate,
             'MozTransform':    translate,
-            'MsTransform':     translate,
+            'msTransform':     translate,
             'OTransform':      translate,
             'transform':       translate
         }

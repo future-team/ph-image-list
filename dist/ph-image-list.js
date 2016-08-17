@@ -628,7 +628,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var styles = {
 	            'WebkitTransform': translate,
 	            'MozTransform': translate,
-	            'MsTransform': translate,
+	            'msTransform': translate,
 	            'OTransform': translate,
 	            'transform': translate
 	        };
