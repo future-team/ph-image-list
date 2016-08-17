@@ -624,8 +624,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var swipeClass = _state.swipeClass;
 
 	        var className = _classnames2['default'](this.props.children.props.className || '', swipeClass);
+	        var translate = 'translate(-' + distance + 'px, 0) translateZ(0)';
 	        var styles = {
-	            transform: 'translate(-' + distance + 'px, 0) translateZ(0)'
+	            'WebkitTransform': translate,
+	            'MozTransform': translate,
+	            'MsTransform': translate,
+	            'OTransform': translate,
+	            'transform': translate
 	        };
 	        return _react2['default'].cloneElement(_react2['default'].Children.only(this.props.children), {
 	            onTouchStart: this.onTouchStartHandler.bind(this),

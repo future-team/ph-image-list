@@ -89,8 +89,13 @@ export default class Swiper extends Component {
     render () {
         const {distance, swipeClass} = this.state;
         const className = classNames((this.props.children.props.className || ''), swipeClass);
+        const translate = `translate(-${distance}px, 0) translateZ(0)`;
         const styles = {
-            transform : `translate(-${distance}px, 0) translateZ(0)`
+            'WebkitTransform': translate,
+            'MozTransform':    translate,
+            'MsTransform':     translate,
+            'OTransform':      translate,
+            'transform':       translate
         }
         return (
             React.cloneElement(React.Children.only(this.props.children), {
