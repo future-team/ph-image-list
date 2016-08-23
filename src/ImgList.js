@@ -197,7 +197,7 @@ export default class ImgList extends Component {
                     images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
                         <div key={item.fileId} className="ph-img-item">
                             <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
-                                <img className="ph-img" src={item.thumbUrl} alt={item.fileName}/>
+                                <div className="ph-img-wrap"><img className="ph-img" src={item.thumbUrl} alt={item.fileName}/></div>
                             </div>
                             {
                                 isEditAble && <div className="ph-img-option">
