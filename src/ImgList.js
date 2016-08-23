@@ -110,6 +110,17 @@ export default class ImgList extends Component {
         }
     }
 
+    componentDidUpdate(){
+        const {showImgListFull} = this.state;
+        let bodyClassName = document.getElementsByTagName('html')[0].className;
+        if(showImgListFull && bodyClassName.indexOf('ph-img-list-body-overflow-hidden') == -1){
+            bodyClassName += ' ph-img-list-body-overflow-hidden';
+        }
+        if(!showImgListFull){
+            bodyClassName = bodyClassName.replace(/\bph-img-list-body-overflow-hidden\b\s*/g,'')
+        }
+        document.getElementsByTagName('html')[0].className = bodyClassName;
+    }
     /**
      * delete item
      * @param index
