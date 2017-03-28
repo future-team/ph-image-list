@@ -1,7 +1,7 @@
 {
   "name": "ph-image-list",
   "version": "0.1.7",
-  "description": "app trade f2e project img list",
+  "description": "images list component for phoenix-ui",
   "repository": {
     "type": "git",
     "url": "https://github.com/future-team/ph-image-list.git"
@@ -12,7 +12,8 @@
     "email": "lee.genffy@gmail.com"
   },
   "keywords": [
-    "trade-static"
+    "phoenix-ui",
+    "ph-image-list"
   ],
   "dependencies": {
     "extend": "^3.0.0",
