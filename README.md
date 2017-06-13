@@ -2,6 +2,8 @@
 image list to show
 
 ```jsx
+import {ImgList,ImgView} from 'ph-image-list'
+
 <ImgList images={imgs1}
      editable={editable}
      deleteDoneCallback={this.deleteDoneCallback}
