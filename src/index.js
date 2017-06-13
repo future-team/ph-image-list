@@ -1,1 +1,2 @@
-export ImgList from './ImgList';
+export ImgList from './ImgList'
+export ImgView from './ImgView'

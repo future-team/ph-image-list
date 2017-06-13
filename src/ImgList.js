@@ -207,29 +207,10 @@ export default class ImgList extends Component {
         )
     }
 
-    render() {
-        const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
+    renderModal(){
+        const  {images, imgIndex,showImgListFull} = this.state;
         return (
-            <div className="ph-img-list">
-                {
-                    images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
-                        <div key={item.fileId} className="ph-img-item">
-                            <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
-                                <img className="ph-img" src={item.thumbUrl} alt={item.fileName}/>
-                            </div>
-                            {
-                                isEditAble && <div className="ph-img-option">
-                                    <span className="ph-img-delete" onClick={this.deleteItem.bind(this, index)}></span>
-                                </div>
-                            }
-                        </div>
-                    ))):""
-                }
-                {
-                    !isEditAble && images.length > this.props.maxShowNum && <div className="ph-img-count">{images.length}</div>
-                }
-                {this.props.children}
-                <Modal className="ph-img-slider-modal">
+            <Modal className="ph-img-slider-modal">
                     { showImgListFull === true &&
                     <div className="ph-img-slider">
                         <div className="ph-img-slider-option">
@@ -257,6 +238,32 @@ export default class ImgList extends Component {
                     </div>
                     }
                 </Modal>
+        )
+    }
+
+    render() {
+        const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
+        return (
+            <div className="ph-img-list">
+                {
+                    images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
+                        <div key={item.fileId} className="ph-img-item">
+                            <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
+                                <img className="ph-img" src={item.thumbUrl} alt={item.fileName}/>
+                            </div>
+                            {
+                                isEditAble && <div className="ph-img-option">
+                                    <span className="ph-img-delete" onClick={this.deleteItem.bind(this, index)}></span>
+                                </div>
+                            }
+                        </div>
+                    ))):""
+                }
+                {
+                    !isEditAble && images.length > this.props.maxShowNum && <div className="ph-img-count">{images.length}</div>
+                }
+                {this.props.children}
+                {this.renderModal() }
             </div>
         )
     }

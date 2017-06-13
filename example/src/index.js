@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react/lib/ReactDOM'
-import {ImgList} from '../../src/index.js'
+import {ImgList,ImgView} from '../../src/index.js'
 import {ImgUpload} from 'ph-image-upload'
 const imgs1 = [{
     fileId: 1,
@@ -165,9 +165,20 @@ export default class Demo extends React.Component {
                                       failCallback={::this.failCallback}
                                       completeCallback={::this.completeCallback}
                                       uploadUrl="http://beta.ask.sankuai.com/attachment/upload" /></ImgList>
+                                     
                 <br/>
-
+                 <ImgView images={[
+                     {
+                            fileId: 9,
+                            url: './imgs/9.jpg',
+                            fileName: 'iii',
+                            thumbUrl: './imgs/9.jpg'
+                        }
+                 ]} ref={(imgview)=>{this.imgview=imgview}} />
                 <br/>
+                <button onClick={()=>{
+                    this.imgview.show()
+                }}>点击打开imageView</button>
                 <br/>
                 <br/>
                 <br/>

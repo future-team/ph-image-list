@@ -6,7 +6,23 @@ image list to show
      editable={editable}
      deleteDoneCallback={this.deleteDoneCallback}
      swipeDoneCallback={this.swipeDoneCallback}}></ImgList>
+
+//单独使用ImgView图片预览功能
+<ImgView images={[
+    {
+        fileId: 9,
+        url: './imgs/9.jpg',
+        fileName: 'iii',
+        thumbUrl: './imgs/9.jpg'
+    }
+]} ref={(imgview)=>{this.imgview=imgview}} />
+
+<button onClick={()=>{
+    //此处可传入图片索引，默认为0
+    this.imgview.show()
+}}>点击打开imageView</button>
 ```
+
 
 ## ImgList API
 View [example](/example/src/index.js) to get more details
