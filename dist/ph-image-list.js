@@ -111,7 +111,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var loop = function loop() {};
 	var imageItem = _react.PropTypes.shape({
-	    fileId: _react.PropTypes.number.isRequired,
+	    fileId: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]).isRequired,
 	    fileName: _react.PropTypes.string.isRequired,
 	    url: _react.PropTypes.string.isRequired,
 	    thumbUrl: _react.PropTypes.string.isRequired
@@ -177,7 +177,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	             * @type function
 	             * @default function(index, item){}
 	             */
-	            deleteDoneCallback: _react.PropTypes.func
+	            deleteDoneCallback: _react.PropTypes.func,
+
+	            /**
+	             * 根据哪个字段名来判断当前是图片还是video，默认图片
+	             * @property  typeParam
+	             * @type string
+	             * @default 无
+	             */
+	            typeParam: _react.PropTypes.string
 	        },
 	        enumerable: true
 	    }, {
@@ -330,6 +338,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }), this.props.swipeDoneCallback.call(this, curIndex));
 	    };
 
+	    ImgList.prototype.isImage = function isImage(url) {
+	        // 判断是图片还是vedio
+	        var imgSuffixReg = /\.(jpg|gif|jpeg|png|bmp)+$/;
+
+	        return imgSuffixReg.test(url);
+	    };
+
+	    ImgList.prototype.renderItem = function renderItem(item, isThumb) {
+	        var typeParam = this.props.typeParam;
+
+	        if (typeParam && !this.isImage(item[typeParam])) {
+	            return isThumb ? _react2['default'].createElement('video', { width: '100%', height: '100%', className: 'ph-img', src: item.url }) : _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
+	        }
+
+	        return this.renderImage(item, isThumb);
+	    };
+
+	    ImgList.prototype.renderImage = function renderImage(item, isThumb) {
+	        return _react2['default'].createElement('img', { className: 'ph-img ', src: isThumb ? item.thumbUrl : item.url, alt: item.fileName });
+	    };
+
 	    ImgList.prototype.renderModal = function renderModal() {
 	        var _this = this;
 
@@ -362,7 +391,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                _react2['default'].createElement(
 	                                    'div',
 	                                    { className: 'ph-img-ctn', style: { 'lineHeight': _this.state.sliderItemStyle.height } },
-	                                    _react2['default'].createElement('img', { className: 'ph-img ', src: item.url, alt: item.fileName })
+	                                    _this.renderItem(item)
 	                                )
 	                            );
 	                        })
@@ -410,7 +439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'ph-img-ctn', onClick: _this2.viewImg.bind(_this2, index) },
-	                        _react2['default'].createElement('img', { className: 'ph-img', src: item.thumbUrl, alt: item.fileName })
+	                        _this2.renderItem(item, true)
 	                    ),
 	                    isEditAble && _react2['default'].createElement(
 	                        'div',
@@ -734,8 +763,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/less-loader/index.js!./index.less", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/less-loader/index.js!./index.less");
+			module.hot.accept("!!../node_modules/_css-loader@0.17.0@css-loader/index.js!../node_modules/_less-loader@2.2.3@less-loader/index.js!./index.less", function() {
+				var newContent = require("!!../node_modules/_css-loader@0.17.0@css-loader/index.js!../node_modules/_less-loader@2.2.3@less-loader/index.js!./index.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});

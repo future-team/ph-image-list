@@ -6,7 +6,7 @@ import '../css/index.less'
 
 const loop = function(){};
 const imageItem = PropTypes.shape({
-    fileId: PropTypes.number.isRequired,
+    fileId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     fileName: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     thumbUrl: PropTypes.string.isRequired
@@ -67,7 +67,15 @@ export default class ImgList extends Component {
          * @type function
          * @default function(index, item){}
          */
-        deleteDoneCallback: PropTypes.func
+        deleteDoneCallback: PropTypes.func,
+        
+        /**
+         * 根据哪个字段名来判断当前是图片还是video，默认图片
+         * @property  typeParam
+         * @type string
+         * @default 无
+         */
+        typeParam: PropTypes.string
     }
 
     static defaultProps = {
@@ -207,6 +215,28 @@ export default class ImgList extends Component {
         )
     }
 
+    isImage(url){ // 判断是图片还是vedio
+        let imgSuffixReg = /\.(jpg|gif|jpeg|png|bmp)+$/
+
+        return imgSuffixReg.test(url)
+    }
+
+    renderItem(item, isThumb){
+        let {typeParam} = this.props
+        
+        if(typeParam && !this.isImage(item[typeParam])){
+            return isThumb?
+                <video width='100%' height='100%' className="ph-img" src={item.url}/>:
+                <video width='100%' className="ph-img" src={item.url} controls="controls"/>
+        }
+
+        return this.renderImage(item, isThumb)
+    }
+
+    renderImage(item, isThumb){
+        return <img className="ph-img " src={isThumb? item.thumbUrl:item.url} alt={item.fileName}/>
+    }
+
     renderModal(){
         const  {images, imgIndex,showImgListFull} = this.state;
         return (
@@ -222,7 +252,7 @@ export default class ImgList extends Component {
                                     images.map((item, index) => (
                                         <div key={item.fileId} className="ph-img-item" style={this.state.sliderItemStyle}>
                                             <div className="ph-img-ctn" style={{'lineHeight': this.state.sliderItemStyle.height}}>
-                                                <img className="ph-img " src={item.url} alt={item.fileName}/>
+                                                {this.renderItem(item)}
                                             </div>
                                         </div>
                                     ))
@@ -249,7 +279,7 @@ export default class ImgList extends Component {
                     images.length ? ((isEditAble? images : images.slice(0, this.props.maxShowNum)).map((item, index) => (
                         <div key={item.fileId} className="ph-img-item">
                             <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
-                                <img className="ph-img" src={item.thumbUrl} alt={item.fileName}/>
+                                {this.renderItem(item, true)}
                             </div>
                             {
                                 isEditAble && <div className="ph-img-option">

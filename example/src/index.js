@@ -2,53 +2,32 @@ import React from 'react'
 import ReactDom from 'react/lib/ReactDOM'
 import {ImgList,ImgView} from '../../src/index.js'
 import {ImgUpload} from 'ph-image-upload'
-const imgs1 = [{
-    fileId: 1,
-    url: './imgs/1.jpg',
-    fileName: 'aaa',
-    thumbUrl: './imgs/1.jpg'
-},{
-    fileId: 2,
-    url: './imgs/2.jpg',
-    fileName: 'bbb',
-    thumbUrl: './imgs/2.jpg'
-},{
-    fileId: 3,
-    url: './imgs/3.jpg',
-    fileName: 'ccc',
-    extra: 'asdasd',
-    thumbUrl: './imgs/3.jpg'
-},{
-    fileId: 4,
-    url: './imgs/4.jpg',
-    fileName: 'ddd',
-    thumbUrl: './imgs/4.jpg'
-},{
-    fileId: 5,
-    url: './imgs/5.jpg',
-    fileName: 'eee',
-    thumbUrl: './imgs/5.jpg'
-},{
-    fileId: 6,
-    url: './imgs/6.jpg',
-    fileName: 'fff',
-    thumbUrl: './imgs/6.jpg'
-},{
-    fileId: 7,
-    url: './imgs/7.png',
-    fileName: 'ggg',
-    thumbUrl: './imgs/7.png'
-},{
-    fileId: 8,
-    url: './imgs/8.jpg',
-    fileName: 'hhh',
-    thumbUrl: './imgs/8.jpg'
-},{
-    fileId: 9,
-    url: './imgs/9.jpg',
-    fileName: 'iii',
-    thumbUrl: './imgs/9.jpg'
-}]
+const imgs1 = [
+    {
+        "fileId": "a672a2ffaeb21af24ab8e83429bac687",
+        "fileName": "1.png",
+        "mimeType": "image/png",
+        "url": "http://apollo.51ping.com/cloud/download/crm/a672a2ffaeb21af24ab8e83429bac687/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OCZmbj0xLnBuZyZrPS9kb3dubG9hZC9jcm0vYTY3MmEyZmZhZWIyMWFmMjRhYjhlODM0MjliYWM2ODc.c3f585001601a8409b6b46a184c79c03",
+        "thumbUrl": "http://apollo.51ping.com/cloud/download/crm/a672a2ffaeb21af24ab8e83429bac687_1/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0xLnBuZ190aHVtYiZrPS9kb3dubG9hZC9jcm0vYTY3MmEyZmZhZWIyMWFmMjRhYjhlODM0MjliYWM2ODc.c64d126888c163db59001908c3a838d7",
+        "thirdpartyDataModel": null
+    },
+    {
+        "fileId": "482d73d749623ecbf25994d463d0d72b",
+        "fileName": "2.png",
+        "mimeType": "image/png",
+        "url": "http://apollo.51ping.com/cloud/download/crm/482d73d749623ecbf25994d463d0d72b/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0yLnBuZyZrPS9kb3dubG9hZC9jcm0vNDgyZDczZDc0OTYyM2VjYmYyNTk5NGQ0NjNkMGQ3MmI.6c1f10d45d5a7fb338c53018c523dbd7",
+        "thumbUrl": "http://apollo.51ping.com/cloud/download/crm/482d73d749623ecbf25994d463d0d72b_1/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0yLnBuZ190aHVtYiZrPS9kb3dubG9hZC9jcm0vNDgyZDczZDc0OTYyM2VjYmYyNTk5NGQ0NjNkMGQ3MmI.71fdf72c6daab56772ceee097e5f721f",
+        "thirdpartyDataModel": null
+    },
+    {
+        "fileId": "123",
+        "fileName": "test.video",
+        "mimeType": "video/mp4",
+        "url": "http://www.w3school.com.cn/i/movie.ogg",
+        "thumbUrl": '',
+        "thirdpartyDataModel": null
+    }
+]
 
 const imgs2 = [
     {
@@ -153,6 +132,7 @@ export default class Demo extends React.Component {
                     <button onClick={this.getStableImgs.bind(this)}>获取编辑后的照片</button>
                 </div>
                 <ImgList images={imgs1}
+                         typeParam='fileName'
                          editable
                          deleteDoneCallback={this.deleteDoneCallback}
                          swipeDoneCallback={this.swipeDoneCallback}
