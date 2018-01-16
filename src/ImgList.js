@@ -224,17 +224,23 @@ export default class ImgList extends Component {
     renderItem(item, isThumb){
         let {typeParam} = this.props
         
-        if(typeParam && !this.isImage(item[typeParam])){
-            return isThumb?
-                <video width='100%' height='100%' className="ph-img" src={item.url}/>:
-                <video width='100%' className="ph-img" src={item.url} controls="controls"/>
+        if(typeParam && !this.isImage(item[typeParam]) && !isThumb){
+            return <video width='100%' className="ph-img" src={item.url} controls="controls"/>
         }
 
         return this.renderImage(item, isThumb)
     }
 
     renderImage(item, isThumb){
-        return <img className="ph-img " src={isThumb? item.thumbUrl:item.url} alt={item.fileName}/>
+        return <img className="ph-img" src={isThumb? item.thumbUrl:item.url} alt={item.fileName}/>
+    }
+
+    renderPlayButton(item){
+        let {typeParam} = this.props
+
+        if(typeParam && !this.isImage(item[typeParam])){
+            return <span className='ph-play-button'></span>
+        }
     }
 
     renderModal(){
@@ -272,7 +278,8 @@ export default class ImgList extends Component {
     }
 
     render() {
-        const  {images, imgIndex, showImgListFull, isEditAble} = this.state;
+        const  {images, imgIndex, showImgListFull, isEditAble} = this.state
+
         return (
             <div className="ph-img-list">
                 {
@@ -280,6 +287,7 @@ export default class ImgList extends Component {
                         <div key={item.fileId} className="ph-img-item">
                             <div className="ph-img-ctn" onClick={this.viewImg.bind(this, index)}>
                                 {this.renderItem(item, true)}
+                                {this.renderPlayButton(item)}
                             </div>
                             {
                                 isEditAble && <div className="ph-img-option">

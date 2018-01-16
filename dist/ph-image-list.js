@@ -348,15 +348,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ImgList.prototype.renderItem = function renderItem(item, isThumb) {
 	        var typeParam = this.props.typeParam;
 
-	        if (typeParam && !this.isImage(item[typeParam])) {
-	            return isThumb ? _react2['default'].createElement('video', { width: '100%', height: '100%', className: 'ph-img', src: item.url }) : _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
+	        if (typeParam && !this.isImage(item[typeParam]) && !isThumb) {
+	            return _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
 	        }
 
 	        return this.renderImage(item, isThumb);
 	    };
 
 	    ImgList.prototype.renderImage = function renderImage(item, isThumb) {
-	        return _react2['default'].createElement('img', { className: 'ph-img ', src: isThumb ? item.thumbUrl : item.url, alt: item.fileName });
+	        return _react2['default'].createElement('img', { className: 'ph-img', src: isThumb ? item.thumbUrl : item.url, alt: item.fileName });
+	    };
+
+	    ImgList.prototype.renderPlayButton = function renderPlayButton(item) {
+	        var typeParam = this.props.typeParam;
+
+	        if (typeParam && !this.isImage(item[typeParam])) {
+	            return _react2['default'].createElement('span', { className: 'ph-play-button' });
+	        }
 	    };
 
 	    ImgList.prototype.renderModal = function renderModal() {
@@ -439,7 +447,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'ph-img-ctn', onClick: _this2.viewImg.bind(_this2, index) },
-	                        _this2.renderItem(item, true)
+	                        _this2.renderItem(item, true),
+	                        _this2.renderPlayButton(item)
 	                    ),
 	                    isEditAble && _react2['default'].createElement(
 	                        'div',
@@ -782,7 +791,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: url(" + __webpack_require__(11) + ") 110px 0;\n  background-size: cover;\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-option,\n.ph-img-slider .ph-img-slider-pager {\n  position: fixed;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n}\n.ph-img-slider .ph-img-slider-option {\n  top: 30px;\n  text-align: right;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return {\n  display: inline-block;\n  margin-right: .97rem;\n  color: #fff;\n  text-decoration: none;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return:before {\n  margin-top: 3px;\n  float: left;\n  content: \" \";\n  width: 28px;\n  height: 28px;\n  line-height: 1.5rem;\n  background: url(" + __webpack_require__(11) + ") -35px 0;\n  background-size: cover;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-pager {\n  bottom: 30px;\n  color: #fff;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-pager > span {\n  border: 1px solid #fff;\n  border-radius: 15px;\n  padding: 0.3rem .9rem;\n}\n.ph-img-list-body-overflow-hidden {\n  overflow: hidden!important;\n}\n", ""]);
+	exports.push([module.id, ".ph-img-item {\n  position: relative;\n  width: 25%;\n  padding: 1vw;\n  box-sizing: border-box;\n  height: 24vw;\n}\n.ph-img-item .ph-img-ctn {\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n.ph-img-item .ph-img-option {\n  position: absolute;\n  top: -3px;\n  right: -2px;\n}\n.ph-img-item .ph-img-option .ph-img-delete {\n  background: url(" + __webpack_require__(11) + ") 110px 0;\n  background-size: cover;\n  height: 20px;\n  width: 20px;\n  display: inline-block;\n  border-radius: 20px;\n  text-align: center;\n}\n.ph-img-list {\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  width: 100%;\n}\n.ph-img-list .ph-img-count {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  padding: 2px 5px;\n  color: #fff;\n  border-radius: 5px;\n  font-size: 14px;\n  background: rgba(0, 0, 0, 0.8);\n}\n.ph-img-list .ph-img-empty {\n  flex: 1;\n  text-align: center;\n  color: #ccc;\n}\n.ph-img-slider {\n  position: fixed;\n  top: 0;\n  left: 0;\n  height: 100%;\n  width: 100%;\n  overflow: hidden;\n  background-color: #000;\n}\n.ph-img-slider .ph-img-slider-option,\n.ph-img-slider .ph-img-slider-pager {\n  position: fixed;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  line-height: 30px;\n}\n.ph-img-slider .ph-img-slider-option {\n  top: 30px;\n  text-align: right;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return {\n  display: inline-block;\n  margin-right: .97rem;\n  color: #fff;\n  text-decoration: none;\n}\n.ph-img-slider .ph-img-slider-option .ph-img-return:before {\n  margin-top: 3px;\n  float: left;\n  content: \" \";\n  width: 28px;\n  height: 28px;\n  line-height: 1.5rem;\n  background: url(" + __webpack_require__(11) + ") -35px 0;\n  background-size: cover;\n}\n.ph-img-slider .ph-img-slider-animation {\n  transition: transform 0.3s ease-out;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item {\n  float: left;\n  padding: 0;\n  z-index: 1;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn {\n  transform-origin: 0 0 0;\n  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);\n  transition-duration: 0ms;\n  transform: translate(0px, 0px) scale(1) translateZ(0px);\n}\n.ph-img-slider .ph-img-slider-ctn .ph-img-item .ph-img-ctn .ph-img {\n  max-width: 100%;\n  vertical-align: middle;\n}\n.ph-img-slider .ph-img-slider-pager {\n  bottom: 30px;\n  color: #fff;\n  text-align: center;\n}\n.ph-img-slider .ph-img-slider-pager > span {\n  border: 1px solid #fff;\n  border-radius: 15px;\n  padding: 0.3rem .9rem;\n}\n.ph-img-list-body-overflow-hidden {\n  overflow: hidden!important;\n}\n.ph-play-button {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  padding: 5px;\n  background-color: rgba(0, 0, 0, 0.3);\n  border-radius: 50%;\n  transform: translate(-50%, -50%);\n}\n.ph-play-button:after {\n  content: '';\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  margin-left: 4px;\n  border-width: 15px 0 15px 30px;\n  border-color: transparent transparent transparent #f1f1f1;\n  box-sizing: border-box;\n  transform: translate(-50%, -50%);\n}\n", ""]);
 
 	// exports
 

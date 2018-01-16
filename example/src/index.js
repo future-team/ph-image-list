@@ -5,27 +5,28 @@ import {ImgUpload} from 'ph-image-upload'
 const imgs1 = [
     {
         "fileId": "a672a2ffaeb21af24ab8e83429bac687",
-        "fileName": "1.png",
-        "mimeType": "image/png",
-        "url": "http://apollo.51ping.com/cloud/download/crm/a672a2ffaeb21af24ab8e83429bac687/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OCZmbj0xLnBuZyZrPS9kb3dubG9hZC9jcm0vYTY3MmEyZmZhZWIyMWFmMjRhYjhlODM0MjliYWM2ODc.c3f585001601a8409b6b46a184c79c03",
-        "thumbUrl": "http://apollo.51ping.com/cloud/download/crm/a672a2ffaeb21af24ab8e83429bac687_1/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0xLnBuZ190aHVtYiZrPS9kb3dubG9hZC9jcm0vYTY3MmEyZmZhZWIyMWFmMjRhYjhlODM0MjliYWM2ODc.c64d126888c163db59001908c3a838d7",
+        "fileName": "1.jpg",
+        "mimeType": "image/jpg",
+        "url": "/example/imgs/1.jpg",
+        "thumbUrl": "/example/imgs/1.jpg",
         "thirdpartyDataModel": null
     },
     {
         "fileId": "482d73d749623ecbf25994d463d0d72b",
         "fileName": "2.png",
         "mimeType": "image/png",
-        "url": "http://apollo.51ping.com/cloud/download/crm/482d73d749623ecbf25994d463d0d72b/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0yLnBuZyZrPS9kb3dubG9hZC9jcm0vNDgyZDczZDc0OTYyM2VjYmYyNTk5NGQ0NjNkMGQ3MmI.6c1f10d45d5a7fb338c53018c523dbd7",
-        "thumbUrl": "http://apollo.51ping.com/cloud/download/crm/482d73d749623ecbf25994d463d0d72b_1/ZXhwaXJlZFRpbWU9MTUxNTY5MjE3MzA0OSZmbj0yLnBuZ190aHVtYiZrPS9kb3dubG9hZC9jcm0vNDgyZDczZDc0OTYyM2VjYmYyNTk5NGQ0NjNkMGQ3MmI.71fdf72c6daab56772ceee097e5f721f",
+        "url": "/example/imgs/2.jpg",
+        "thumbUrl": "/example/imgs/2.jpg",
         "thirdpartyDataModel": null
     },
     {
-        "fileId": "123",
-        "fileName": "test.video",
-        "mimeType": "video/mp4",
-        "url": "http://www.w3school.com.cn/i/movie.ogg",
-        "thumbUrl": '',
-        "thirdpartyDataModel": null
+        
+fileId: "4564972818963064795",
+
+fileName: "f0.mp4",
+thumbUrl: "http://ojx4wlqvg.bkt.clouddn.com/image/blog/dom-diff.png",
+
+url: "http://1251413404.vod2.myqcloud.com/vodgzp1251413404/4564972818963064795/f0.mp4"
     }
 ]
 
