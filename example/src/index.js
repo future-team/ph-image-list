@@ -13,7 +13,7 @@ const imgs1 = [
     },
     {
         "fileId": "482d73d749623ecbf25994d463d0d72b",
-        "fileName": "png.pngs",
+        "fileName": "3.png",
         "mimeType": "image/png",
         "url": "/example/imgs/2.jpg",
         "thumbUrl": "/example/imgs/2.jpg",
@@ -23,7 +23,7 @@ const imgs1 = [
         
 fileId: "4564972818963064795",
 "mimeType": "video/png",
-fileName: "f0.mp4",
+fileName: "f0",
 thumbUrl: "http://ojx4wlqvg.bkt.clouddn.com/image/blog/dom-diff.png",
 
 url: "http://1251413404.vod2.myqcloud.com/vodgzp1251413404/4564972818963064795/f0.mp4"

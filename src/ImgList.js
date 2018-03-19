@@ -226,7 +226,11 @@ export default class ImgList extends Component {
     renderItem(item, isThumb){
         let {typeParam, renderItemCallback} = this.props
         
-        if(typeParam && !this.getMimeType(item[typeParam]) == 'video' && !isThumb){
+        if(typeParam == 'fileName' && !this.isImage(item[typeParam]) && !isThumb){
+            return <video width='100%' className="ph-img" src={item.url} controls="controls"/>
+        }
+
+        if(typeParam == 'mimeType' && !this.getMimeType(item[typeParam]) == 'video' && !isThumb){
             return <video width='100%' className="ph-img" src={item.url} controls="controls"/>
         }
         
@@ -245,7 +249,11 @@ export default class ImgList extends Component {
     renderPlayButton(item){
         let {typeParam} = this.props
 
-        if(typeParam && this.getMimeType(item[typeParam]) == 'video'){
+        if(typeParam == 'mimeType' && this.getMimeType(item[typeParam]) == 'video'){
+            return <span className='ph-play-button'></span>
+        }
+
+        if(typeParam == 'fileName' && !this.isImage(item[typeParam])){
             return <span className='ph-play-button'></span>
         }
     }
