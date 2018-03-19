@@ -52,14 +52,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(1);
 
 
-/***/ }),
+/***/ },
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -79,9 +79,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.ImgView = _ImgView3['default'];
 
-/***/ }),
+/***/ },
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -345,11 +345,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return imgSuffixReg.test(url);
 	    };
 
-	    ImgList.prototype.renderItem = function renderItem(item, isThumb) {
-	        var typeParam = this.props.typeParam;
+	    ImgList.prototype.getMimeType = function getMimeType(url) {
+	        return (url || '').split('/')[0];
+	    };
 
-	        if (typeParam && !this.isImage(item[typeParam]) && !isThumb) {
+	    ImgList.prototype.renderItem = function renderItem(item, isThumb) {
+	        var _props = this.props;
+	        var typeParam = _props.typeParam;
+	        var renderItemCallback = _props.renderItemCallback;
+
+	        if (typeParam == 'fileName' && !this.isImage(item[typeParam]) && !isThumb) {
 	            return _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
+	        }
+
+	        if (typeParam == 'mimeType' && !this.getMimeType(item[typeParam]) == 'video' && !isThumb) {
+	            return _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
+	        }
+
+	        var isFunc = Object.prototype.toString.call(renderItemCallback).slice(8, -1) == 'Function';
+	        if (typeParam && typeParam == 'defined' && isFunc) {
+	            return renderItemCallback(item, isThumb);
 	        }
 
 	        return this.renderImage(item, isThumb);
@@ -362,7 +377,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    ImgList.prototype.renderPlayButton = function renderPlayButton(item) {
 	        var typeParam = this.props.typeParam;
 
-	        if (typeParam && !this.isImage(item[typeParam])) {
+	        if (typeParam == 'mimeType' && this.getMimeType(item[typeParam]) == 'video') {
+	            return _react2['default'].createElement('span', { className: 'ph-play-button' });
+	        }
+
+	        if (typeParam == 'fileName' && !this.isImage(item[typeParam])) {
 	            return _react2['default'].createElement('span', { className: 'ph-play-button' });
 	        }
 	    };
@@ -473,15 +492,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = ImgList;
 	module.exports = exports['default'];
 
-/***/ }),
+/***/ },
 /* 3 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
-/***/ }),
+/***/ },
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -544,15 +563,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = Modal;
 	module.exports = exports['default'];
 
-/***/ }),
+/***/ },
 /* 5 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
-/***/ }),
+/***/ },
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -702,9 +721,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = Swiper;
 	module.exports = exports['default'];
 
-/***/ }),
+/***/ },
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	  Copyright (c) 2016 Jed Watson.
@@ -756,9 +775,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}());
 
 
-/***/ }),
+/***/ },
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -772,8 +791,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/_css-loader@0.17.0@css-loader/index.js!../node_modules/_less-loader@2.2.3@less-loader/index.js!./index.less", function() {
-				var newContent = require("!!../node_modules/_css-loader@0.17.0@css-loader/index.js!../node_modules/_less-loader@2.2.3@less-loader/index.js!./index.less");
+			module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/less-loader/index.js!./index.less", function() {
+				var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/less-loader/index.js!./index.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -782,9 +801,9 @@ return /******/ (function(modules) { // webpackBootstrap
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ }),
+/***/ },
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(10)();
 	// imports
@@ -796,9 +815,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	// exports
 
 
-/***/ }),
+/***/ },
 /* 10 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -852,15 +871,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ }),
+/***/ },
 /* 11 */
-/***/ (function(module, exports) {
+/***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAnCAYAAACL4Y8gAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjVBMjNDNzk0RDVGMTFFNjhFN0RDNTRFODIyNzRDQzQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjVBMjNDN0E0RDVGMTFFNjhFN0RDNTRFODIyNzRDQzQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyNUEyM0M3NzRENUYxMUU2OEU3REM1NEU4MjI3NENDNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoyNUEyM0M3ODRENUYxMUU2OEU3REM1NEU4MjI3NENDNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PveNY3IAAAlxSURBVHja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"
 
-/***/ }),
+/***/ },
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -1083,9 +1102,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 
-/***/ }),
+/***/ },
 /* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1138,7 +1157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports['default'] = ImgView;
 	module.exports = exports['default'];
 
-/***/ })
+/***/ }
 /******/ ])
 });
 ;
