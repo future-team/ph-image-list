@@ -13,7 +13,7 @@ const imgs1 = [
     },
     {
         "fileId": "482d73d749623ecbf25994d463d0d72b",
-        "fileName": "2.png",
+        "fileName": "png.pngs",
         "mimeType": "image/png",
         "url": "/example/imgs/2.jpg",
         "thumbUrl": "/example/imgs/2.jpg",
@@ -22,7 +22,16 @@ const imgs1 = [
     {
         
 fileId: "4564972818963064795",
+"mimeType": "video/png",
+fileName: "f0.mp4",
+thumbUrl: "http://ojx4wlqvg.bkt.clouddn.com/image/blog/dom-diff.png",
 
+url: "http://1251413404.vod2.myqcloud.com/vodgzp1251413404/4564972818963064795/f0.mp4"
+    },
+    {
+        
+fileId: "4564972818963064795e",
+"mimeType": "application/pdf",
 fileName: "f0.mp4",
 thumbUrl: "http://ojx4wlqvg.bkt.clouddn.com/image/blog/dom-diff.png",
 
@@ -95,7 +104,10 @@ export default class Demo extends React.Component {
     deleteDoneCallback(index, item){
         console.log('删除', index, item)
     }
-
+    renderItemCallback(item, isThumb) {
+        console.log(item)
+        return <img className="ph-img" src={isThumb? item.thumbUrl:item.url} alt={item.fileName}/>
+    }
     filter(files, maxSize) {
         var arrFiles = [];
         for (var i = 0, file; file = files[i]; i++) {
@@ -133,10 +145,11 @@ export default class Demo extends React.Component {
                     <button onClick={this.getStableImgs.bind(this)}>获取编辑后的照片</button>
                 </div>
                 <ImgList images={imgs1}
-                         typeParam='fileName'
+                         typeParam='mimeType'
                          editable
                          deleteDoneCallback={this.deleteDoneCallback}
                          swipeDoneCallback={this.swipeDoneCallback}
+                         renderItemCallback={this.renderItemCallback.bind(this)}
                          ref={(imgList)=>{
                             this.imgList1 = imgList;
                         }}><ImgUpload multiple
