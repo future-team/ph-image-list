@@ -230,7 +230,7 @@ export default class ImgList extends Component {
             return <video width='100%' className="ph-img" src={item.url} controls="controls"/>
         }
 
-        if(typeParam == 'mimeType' && !this.getMimeType(item[typeParam]) == 'video' && !isThumb){
+        if(typeParam == 'mimeType' && this.getMimeType(item[typeParam]) == 'video' && !isThumb){
             return <video width='100%' className="ph-img" src={item.url} controls="controls"/>
         }
         

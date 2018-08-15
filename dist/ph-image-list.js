@@ -358,7 +358,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
 	        }
 
-	        if (typeParam == 'mimeType' && !this.getMimeType(item[typeParam]) == 'video' && !isThumb) {
+	        if (typeParam == 'mimeType' && this.getMimeType(item[typeParam]) == 'video' && !isThumb) {
 	            return _react2['default'].createElement('video', { width: '100%', className: 'ph-img', src: item.url, controls: 'controls' });
 	        }
 
