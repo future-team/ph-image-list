@@ -33,11 +33,11 @@ module.exports ={
             commonjs: 'eagle-ui',
             amd: 'eagle-ui'
         },
-        'react/lib/ReactDOM': {
+        'react-dom': {
             root: 'ReactDom',
-            commonjs2: 'react/lib/ReactDOM',
-            commonjs: 'react/lib/ReactDOM',
-            amd: 'react/lib/ReactDOM'
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
         },
         'eagle-ui/lib/utils/Component': {
             root: 'Component',

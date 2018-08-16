@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDom from 'react/lib/ReactDOM'
+import ReactDom from 'react-dom'
 import {ImgList,ImgView} from '../../src/index.js'
 import {ImgUpload} from 'ph-image-upload'
 const imgs1 = [
