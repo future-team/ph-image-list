@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDom from 'react/lib/ReactDOM'
+import ReactDom from 'react-dom'
 export default class Modal extends React.Component {
     constructor(props, context){
         super(props, context)
